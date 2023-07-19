@@ -1,5 +1,9 @@
 // 1.
 function sum(array) {
+  if (!Array.isArray(array)) {
+    throw new TypeError("The argument must be an array!");
+  }
+
   let sum = 0;
   for (let i = 0; i < array.length; i++) {
     sum += array[i];
@@ -7,14 +11,30 @@ function sum(array) {
   return sum;
 }
 
-let res = sum(null);
-console.log(res);
+try {
+  let res = sum(null);
+  console.log(res);
+} catch (error) {
+  if (error instanceof TypeError) {
+  console.error(error.message);
+  }
+}
 
 // 2.
 // tests
-sayName("Alex");
-sayName(1);
+try {
+  sayName("Alex");
+  sayName(1);
+} catch (error) {
+  console.log(error.message);
+}
 // Your code here
+function sayName(name) {
+  if (typeof name !== "string") {
+    throw new TypeError("Invalid name! Must be a string!");
+  }
+  console.log(name);
+}
 
 // 3.
 function greet(greeting) {
@@ -23,4 +43,10 @@ function greet(greeting) {
   }
 
   console.log(greeting);
+}
+
+try {
+  greet(undefined);
+} catch {
+  console.log("Hello World!")
 }
